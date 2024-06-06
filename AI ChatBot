@@ -1,0 +1,90 @@
+CHATBOT WITH RULE-BASED
+
+RESPONSES
+
+Build a simple chatbot that responds to user inputs based on
+predefined rules. Use if-else statements or pattern matching
+techniques to identify user queries and provide appropriate
+responses. This will give you a basic understanding of natural
+language processing and conversation flow.
+
+CODE:
+
+def chatbot(uip):
+    uip = uip.lower()
+
+    if "hello" in uip or "hi" in uip:
+        return "Hello! How can I help you today?"
+
+    elif "how are you" in uip:
+        return "I'm just a chatbot, but I'm here to help you!"
+
+    elif "your name" in uip:
+        return "I'm Twinkle, your virtual assistant."
+
+    elif "help" in uip:
+        return "Sure, I'm here to help! What do you need assistance with?"
+
+    elif "bye" in uip or "goodbye" in uip:
+        return "Goodbye! Have a great day!"
+
+    elif "what is the weather" in uip:
+        return "I'm not able to check the weather, but you can use a weather app or website for that."
+
+    elif "what is your purpose" in uip:
+        return "My purpose is to help answer your questions and assist you with various tasks."
+
+    elif "what is your favorite color" in uip:
+        return "As an AI, I don't have preferences, but I think all colors are beautiful!"
+
+    else:
+        return "I'm sorry, I don't understand that. Can you please rephrase?"
+
+# Main loop to interact with the chatbot
+def main():
+    print("Enter your name:")
+    nm = input()
+    print("Welcome",nm,"! Type 'bye/goodbye/exit' to exit.")
+    while True:
+        uip = input("You: ")
+        if uip.lower() in ['bye','goodbye','exit']:
+            print("Goodbye! Have a great day!")
+            break
+        res = chatbot(uip)
+        print(res)
+
+if __name__=="__main__":
+  main()
+
+
+
+OUTPUT:
+Enter your name:
+Sahithi
+Welcome Sahithi ! Type 'bye/goodbye/exit' to exit.
+You: HeLlO
+Hello! How can I help you today?
+You: How are you
+I'm just a chatbot, but I'm here to help you!
+You: your name
+I'm Twinkle, your virtual assistant.
+You: help
+Sure, I'm here to help! What do you need assistance with?
+You: what is the whether
+I'm sorry, I don't understand that. Can you please rephrase?
+You: what is your purpose
+My purpose is to help answer your questions and assist you with various tasks.
+You: what is your favorite color
+As an AI, I don't have preferences, but I think all colors are beautiful!
+You: Do you know know me
+I'm sorry, I don't understand that. Can you please rephrase?
+You: Do you like me
+I'm sorry, I don't understand that. Can you please rephrase?
+You: Bye
+Goodbye! Have a great day!
+
+
+
+
+
+
