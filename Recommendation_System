@@ -1,5 +1,9 @@
-CODE>>>
+QUESTION>>>
+RECOMMENDATION SYSTEM
+Create a simple recommendation system that suggests items to users based on their preferences. You can use techniques like collaborative filtering or content-based filtering to recommend 
+movies, books, or products to users.
 
+CODE>>>
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics import pairwise_distances
@@ -54,7 +58,7 @@ user = 'User3'
 recommendations = get_recommendations(user, pivot_table, usdf)
 print(f"Recommendations for {user}:\n{recommendations}")
 
-
+VARIABLE USAGE>>>
 # dt - data
 # User_Similarity - us
 # user_similarity_df - usdf
@@ -65,7 +69,6 @@ print(f"Recommendations for {user}:\n{recommendations}")
 
 
 OUTPUT>>>
-
 C:\>python --version
 Python 3.12.3
 
@@ -150,6 +153,7 @@ smusr: Gets the similarity scores of the specified user with all other users.
 wsm: Calculates a weighted sum of ratings from similar users.
 Recommendations are filtered to exclude movies the user has already rated.
 The top N recommendations are returned.
+
 
 Example Usage:
 The function is called for User1, User2, and User3 to get their respective movie recommendations, which are then printed.
