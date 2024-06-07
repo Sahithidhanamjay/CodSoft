@@ -1,0 +1,243 @@
+QUESTION>>>
+TIC-TAC-TOE AI
+Implement an AI agent that plays the classic game of Tic-Tac-Toe against a human player. 
+You can use algorithms like Minimax with or without Alpha-Beta Pruning to make the AI player unbeatable.This project will help you understand game theory and basic search algorithms.
+
+EXPLAINATION>>>
+Game Representation:
+The Tic-Tac-Toe board is represented as a list.
+We'll use X for the human player, O for the AI, and a blank space (" ") for empty spots.
+
+Minimax Algorithm:
+The algorithm evaluates the board to determine if there is a winner, a draw, or if the game should continue.
+It assigns a score to each possible move and chooses the move with the best score.
+
+Alpha-Beta Pruning:
+This optimization reduces the number of nodes evaluated by the Minimax algorithm.
+
+
+CODE>>>
+import math
+def print_bd(bd):
+    print("\n")
+    for row in [bd[i:i + 3] for i in range(0, 9, 3)]:
+        print("| " + " | ".join(row) + " |")
+    print("\n")
+
+def check_winner(bd, ply):
+    wcnd = [(0, 1, 2), (3, 4, 5), (6, 7, 8),  # rows
+            (0, 3, 6), (1, 4, 7), (2, 5, 8),  # columns
+            (0, 4, 8), (2, 4, 6)]             # diagonals
+    for i in wcnd:
+        if bd[i[0]] == bd[i[1]] == bd[i[2]] == ply:
+            return True
+    return False
+
+def minimax(bd, d, imx, a, b):
+    if check_winner(bd, "O"):
+        return 1
+    if check_winner(bd, "X"):
+        return -1
+    if " " not in bd:
+        return 0
+
+    if imx:
+        mav = -math.inf
+        for i in range(9):
+            if bd[i] == " ":
+                bd[i] = "O"
+                ev = minimax(bd, d+1, False, a, b)
+                bd[i] = " "
+                mav = max(mav, ev)
+                a = max(a, ev)
+                if b <= a:
+                    break
+        return mav
+    else:
+        miv = math.inf
+        for i in range(9):
+            if bd[i] == " ":
+                bd[i] = "X"
+                ev = minimax(bd, d+1, True, a, b)
+                bd[i] = " "
+                miv = min(miv, ev)
+                b = min(b, ev)
+                if b <= a:
+                    break
+        return miv
+
+def best_move(bd):
+    bvl = -math.inf
+    mv = -1
+    for i in range(9):
+        if bd[i] == " ":
+            bd[i] = "O"
+            mvl = minimax(bd, 0, False, -math.inf, math.inf)
+            bd[i] = " "
+            if mvl > bvl:
+                bvl = mvl
+                mv  = i
+    return mv
+
+def tic_tac_toe():
+    bd = [" " for _ in range(9)]
+    hm = "X"
+    ai = "O"
+
+    print_bd(bd)
+
+    while " " in bd:
+        # Human move
+        mv = int(input("Enter your move (1-9): ")) - 1
+        if bd[mv] != " ":
+            print("Invalid move! Try again.")
+            continue
+        bd[mv] = hm
+
+        print_bd(bd)
+
+        if check_winner(bd, hm):
+            print("Human wins!")
+            return
+
+        if " " not in bd:
+            print("It's a draw!")
+            return
+
+        # AI move
+        mv = best_move(bd)
+        bd[mv] = ai
+
+        print_bd(bd)
+
+        if check_winner(bd, ai):
+            print("AI wins!")
+            return
+        if " " not in bd:
+            print("It's a draw!")
+            return
+# Run the game
+tic_tac_toe()
+
+VARIABLE USAGE>>>
+# board - bd
+# human - hm
+# move - mv
+# best_val - bvl
+# move_val - mvl
+# win_conditions - wcnd
+# Player - ply
+# is_maximizing - imx
+# alpha - a 
+# beta - b
+# depth - d
+# max_eval - mav
+# min_eval - miv
+# eval - ev
+
+
+OUPTUT>>>
+C:\script>python Tic_Tac_Toe.py
+
+|   |   |   |
+|   |   |   |
+|   |   |   |
+
+Enter your move (1-9): 1
+
+| X |   |   |
+|   |   |   |
+|   |   |   |
+
+| X |   |   |
+|   | O |   |
+|   |   |   |
+
+Enter your move (1-9): 3
+
+| X |   | X |
+|   | O |   |
+|   |   |   |
+
+| X | O | X |
+|   | O |   |
+|   |   |   |
+
+Enter your move (1-9): 8
+
+| X | O | X |
+|   | O |   |
+|   | X |   |
+
+| X | O | X |
+| O | O |   |
+|   | X |   |
+
+Enter your move (1-9): 6
+
+| X | O | X |
+| O | O | X |
+|   | X |   |
+
+
+| X | O | X |
+| O | O | X |
+|   | X | O |
+
+Enter your move (1-9): 7
+
+| X | O | X |
+| O | O | X |
+| X | X | O |
+
+It's a draw!
+
+
+
+C:\script>python Tic_Tac_Toe.py
+|   |   |   |
+|   |   |   |
+|   |   |   |
+
+Enter your move (1-9): 1
+
+| X |   |   |
+|   |   |   |
+|   |   |   |
+
+
+| X |   |   |
+|   | O |   |
+|   |   |   |
+
+Enter your move (1-9): 4
+
+| X |   |   |
+| X | O |   |
+|   |   |   |
+
+| X |   |   |
+| X | O |   |
+| O |   |   |
+
+Enter your move (1-9): 3
+
+| X |   | X |
+| X | O |   |
+| O |   |   |
+
+| X | O | X |
+| X | O |   |
+| O |   |   |
+
+Enter your move (1-9): 6
+| X | O | X |
+| X | O | X |
+| O |   |   |
+
+
+| X | O | X |
+| X | O | X |
+| O | O |   |
+
+AI wins!
